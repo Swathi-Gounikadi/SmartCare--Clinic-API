@@ -1,27 +1,27 @@
 # 🏥 SmartCare Clinic API
 
-### Python FastAPI Backend System 🚀
+### 🚀 FastAPI Backend Project
 
 ---
 
 ## 📌 Project Overview
 
-**SmartCare Clinic API** is a RESTful backend application built using **FastAPI** to manage doctors, appointments, and consultation workflows.
+**SmartCare Clinic API** is a RESTful backend application built using FastAPI to manage doctors and medical appointments.
 
-👉 **Welcome to SmartCare Clinic API – Smart Healthcare, Simplified.**
+👉 *“Smart Healthcare, Simplified.”*
 
-This project simulates a **real-world clinic management system** and demonstrates strong backend development concepts such as API design, validation, and business logic handling.
+This project focuses on implementing real-world backend logic such as filtering, searching, sorting, pagination, and appointment workflow handling using in-memory data.
 
 ---
 
 ## 🎯 Objective
 
-The objective of this project is to build a **complete backend system** that handles:
+To build a backend system that can:
 
-* Doctor management
-* Appointment booking
-* Consultation workflow
-* Real-time filtering, searching, and pagination
+* Manage doctors and their availability
+* Handle appointment booking and lifecycle
+* Apply business rules like fee calculation & discounts
+* Support dynamic data operations (filter/search/sort/page)
 
 ---
 
@@ -29,73 +29,68 @@ The objective of this project is to build a **complete backend system** that han
 
 ### 👨‍⚕️ Doctor Management
 
-* Add new doctors with validation
-* Prevent duplicate doctor entries
-* Update consultation fee & availability
+* Get all doctors with availability count
+* Add new doctor with validation
+* Prevent duplicate doctor names
+* Update doctor fee & availability
 * Delete doctor *(only if no active appointments)*
-* Get doctor details and list
+* Get doctor by ID
 
 ---
 
 ### 📅 Appointment Management
 
-* Book appointment with validation
-* Auto-assign doctor based on availability
+* Create appointment with validation
 * Prevent booking unavailable doctors
-* Manage full appointment lifecycle
+* Automatic fee calculation
+* Track appointment status
 
 ---
 
 ## 💰 Fee Calculation Rules
 
-| Appointment Type | Fee Applied |
-| ---------------- | ----------- |
-| In-person        | 100%        |
-| Video            | 80%         |
-| Emergency        | 150%        |
+| Appointment Type | Fee  |
+| ---------------- | ---- |
+| In-person        | 100% |
+| Video            | 80%  |
+| Emergency        | 150% |
 
-👉 **Senior Citizen Discount:**
-Additional **15% reduction** applied after fee calculation
+👉 Senior Citizen → **15% discount applied after calculation**
 
 ---
 
 ## 🔄 Appointment Workflow
 
-### Status Flow:
-
-* **Scheduled → Confirmed → Completed**
-* **Scheduled → Cancelled**
+```id="q1a2b3"
+Scheduled → Confirmed → Completed  
+Scheduled → Cancelled  
+```
 
 ---
 
 ## 🔍 Data Operations
 
-### ✅ Filtering
+### ✅ Filtering (`/doctors/filter`)
 
 * Specialization
-* Maximum fee
-* Minimum experience
+* Max fee
+* Min experience
 * Availability
-
----
 
 ### 🔎 Searching
 
-* Doctors → by name & specialization
-* Appointments → by patient name
-
----
+* Doctors → name / specialization
+* Appointments → patient name
 
 ### 📊 Sorting
 
 * Doctors → fee, name, experience
-* Appointments → date, final fee
-
----
+* Appointments → final_fee, date
 
 ### 📄 Pagination
 
-* Supported for both doctors and appointments
+* Doctors → `/doctors/page`
+* Appointments → `/appointments/page`
 
 ---
 
@@ -103,56 +98,57 @@ Additional **15% reduction** applied after fee calculation
 
 ### 👨‍⚕️ Doctors
 
-| Method | Endpoint        | Description      |
-| ------ | --------------- | ---------------- |
-| GET    | `/doctors`      | Get all doctors  |
-| GET    | `/doctors/{id}` | Get doctor by ID |
-| POST   | `/doctors`      | Add new doctor   |
-| PUT    | `/doctors/{id}` | Update doctor    |
-| DELETE | `/doctors/{id}` | Delete doctor    |
+| Method | Endpoint         | Description      |
+| ------ | ---------------- | ---------------- |
+| GET    | /doctors         | Get all doctors  |
+| GET    | /doctors/{id}    | Get doctor by ID |
+| POST   | /doctors         | Add new doctor   |
+| PUT    | /doctors/{id}    | Update doctor    |
+| DELETE | /doctors/{id}    | Delete doctor    |
+| GET    | /doctors/summary | Doctors summary  |
 
 ---
 
 ### 🔍 Advanced Doctor APIs
 
-| Endpoint          | Description                         |
-| ----------------- | ----------------------------------- |
-| `/doctors/filter` | Filter doctors                      |
-| `/doctors/search` | Search doctors                      |
-| `/doctors/sort`   | Sort doctors                        |
-| `/doctors/page`   | Pagination                          |
-| `/doctors/browse` | Combined search + sort + pagination |
+| Endpoint        | Description                         |
+| --------------- | ----------------------------------- |
+| /doctors/filter | Filter doctors                      |
+| /doctors/search | Search doctors                      |
+| /doctors/sort   | Sort doctors                        |
+| /doctors/page   | Pagination                          |
+| /doctors/browse | Combined search + sort + pagination |
 
 ---
 
 ### 📅 Appointments
 
-| Method | Endpoint        | Description          |
-| ------ | --------------- | -------------------- |
-| GET    | `/appointments` | Get all appointments |
-| POST   | `/appointments` | Create appointment   |
+| Method | Endpoint      | Description          |
+| ------ | ------------- | -------------------- |
+| GET    | /appointments | Get all appointments |
+| POST   | /appointments | Create appointment   |
 
 ---
 
 ### 🔄 Appointment Workflow APIs
 
-| Endpoint                      | Description          |
-| ----------------------------- | -------------------- |
-| `/appointments/{id}/confirm`  | Confirm appointment  |
-| `/appointments/{id}/cancel`   | Cancel appointment   |
-| `/appointments/{id}/complete` | Complete appointment |
+| Endpoint                    | Description          |
+| --------------------------- | -------------------- |
+| /appointments/{id}/confirm  | Confirm appointment  |
+| /appointments/{id}/cancel   | Cancel appointment   |
+| /appointments/{id}/complete | Complete appointment |
 
 ---
 
 ### 🔍 Advanced Appointment APIs
 
-| Endpoint                       | Description             |
-| ------------------------------ | ----------------------- |
-| `/appointments/active`         | Get active appointments |
-| `/appointments/search`         | Search appointments     |
-| `/appointments/sort`           | Sort appointments       |
-| `/appointments/page`           | Pagination              |
-| `/appointments/by-doctor/{id}` | Appointments by doctor  |
+| Endpoint                     | Description              |
+| ---------------------------- | ------------------------ |
+| /appointments/active         | Active appointments      |
+| /appointments/by-doctor/{id} | Doctor-wise appointments |
+| /appointments/search         | Search appointments      |
+| /appointments/sort           | Sort appointments        |
+| /appointments/page           | Pagination               |
 
 ---
 
@@ -160,18 +156,19 @@ Additional **15% reduction** applied after fee calculation
 
 * Patient name ≥ 2 characters
 * Reason ≥ 5 characters
-* Doctor ID must be valid
-* Appointment date uses proper date format
-* Appointment type restricted using Enum
+* Doctor ID must exist
+* Doctor must be available for booking
+* Appointment type supports: `video`, `in-person`, `emergency`
 
 ---
 
 ## 📂 Project Structure
 
-```
+```id="z9x8y7"
 project/
 │── main.py
 │── README.md
+│── screenshots/
 ```
 
 ---
@@ -180,47 +177,66 @@ project/
 
 ### 1️⃣ Install dependencies
 
-```bash
+```bash id="abc123"
 pip install fastapi uvicorn
 ```
 
-### 2️⃣ Run the server
+### 2️⃣ Run server
 
-```bash
+```bash id="def456"
 uvicorn main:app --reload
 ```
 
 ### 3️⃣ Open in browser
 
-👉 Swagger UI:
-http://127.0.0.1:8000/docs
+👉 http://127.0.0.1:8000/docs
+
+---
+
+## 📸 Screenshots
+
+```md id="ghi789"
+![Home](screenshots/Q1_home.png)
+![Doctors](screenshots/Q2_get_doctors.png)
+```
 
 ---
 
 ## 💡 Design Highlights
 
-* Clean REST API structure
-* Use of Pydantic models for validation
-* Enum-based request validation
-* Proper error handling using HTTPException
-* Modular helper functions
-* Business rules implemented (doctor availability, deletion checks)
-* In-memory storage for simplicity
+* Clean API structure using FastAPI
+* Pydantic models for validation
+* Helper functions for reusable logic
+* Business rules implemented (availability, deletion checks, fee logic)
+* In-memory data handling for simplicity
 
 ---
 
-## 🚀 Future Enhancements
+## ⚠️ Limitations
 
-* 🗄 Database integration (PostgreSQL / MongoDB)
-* 🔐 Authentication (JWT Login System)
-* ⏰ Time-slot based booking system
-* 💳 Payment integration
-* 🤖 AI-based doctor recommendation system
+* Data stored in memory (resets on restart)
+* No authentication system
+* No database integration
+
+---
+
+## 🚀 Future Improvements
+
+* Add database (PostgreSQL / MongoDB)
+* Add authentication (JWT)
+* Add time-slot booking
+* Deploy API online
 
 ---
 
 ## 👩‍💻 Author
 
-**Swathi Gounikadi**
-Data Science Trainee
-Innomatics Research Labs
+### Swathi Gounikadi
+#### Data Science Trainee – Innomatics Research Labs
+
+---
+
+## ⭐ Final Note
+
+This project demonstrates strong backend fundamentals and is a solid foundation for building production-level applications.
+
